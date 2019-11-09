@@ -4,10 +4,8 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -15,10 +13,14 @@ import java.util.Date;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    @NotNull
+    @Column(unique = true)
     private int prodId;
+    @NotNull
     private String prodName;
     private String prodDescription;
+    @NotNull
     private int prodPrice;
     private int prodQuantity;
     private String prodCategory;

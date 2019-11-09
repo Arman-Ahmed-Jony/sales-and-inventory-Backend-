@@ -16,28 +16,47 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductAPI {
-private final ProductService productService;
+    private final ProductService productService;
 
 //    public ProductAPI(ProductService productService) {
 //        this.productService = productService;
 //    }
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll(){
+    public ResponseEntity<List<Product>> findAll() {
         return ResponseEntity.ok(productService.findAll());
     }
+
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody Product product){
+    public ResponseEntity create(@Valid @RequestBody Product product) {
         return ResponseEntity.ok(productService.save(product));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Integer id){
+    public ResponseEntity<Product> findById(@PathVariable Integer id) {
         Optional<Product> product = productService.findById(id);
-        if(!product.isPresent()){
-            log.error("ID: "+id+" is not existed");
+        if (!product.isPresent()) {
+            log.error("ID: " + id + " is not existed");
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(product.get());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> update(@PathVariable Integer id, @Valid @RequestBody Product product) {
+        if (!productService.findById(id).isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(productService.save(product));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Integer id) {
+        if (!productService.findById(id).isPresent()) {
+            log.error("Id " + id + " is not existed");
+            ResponseEntity.badRequest().build();
+        }
+        productService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
