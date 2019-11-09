@@ -14,18 +14,26 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NotNull
     @Column(unique = true)
-    private int prodId;
+    private Integer prodId;
+
     @NotNull
     private String prodName;
+
     private String prodDescription;
+
     @NotNull
     private int prodPrice;
+
     private int prodQuantity;
+
     private String prodCategory;
+
     @CreationTimestamp
     private Date created;
+
     @UpdateTimestamp
     private Date updated;
 

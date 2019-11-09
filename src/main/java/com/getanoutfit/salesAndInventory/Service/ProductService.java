@@ -5,6 +5,7 @@ import com.getanoutfit.salesAndInventory.Model.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,21 +14,27 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductRepository productRepository;
-//
-//    public ProductService(ProductRepository productRepository) {
-//        this.productRepository = productRepository;
-//    }
 
-    public List<Product> findAll(){
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
-    public Optional<Product> findById(Integer id){
+
+    public Optional<Product> findById(Integer id) {
         return productRepository.findById(id);
     }
-    public Product save(Product product){
+
+    public Product save(Product product) {
         return productRepository.save(product);
     }
-    public void deleteById(Integer id){
+
+    public void deleteById(Integer id) {
         productRepository.deleteById(id);
+    }
+
+    public Product findByProdIdAndProdName(Integer prodId, String prodName) {
+        return productRepository.findByProdIdAndProdName(prodId, prodName);
+    }
+    public List<Product> findByCreatedBetween(Date startDate, Date endDate){
+        return productRepository.findByCreatedBetween(startDate, endDate);
     }
 }
