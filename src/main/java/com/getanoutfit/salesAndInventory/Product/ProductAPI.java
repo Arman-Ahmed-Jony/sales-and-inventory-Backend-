@@ -1,13 +1,17 @@
-package com.getanoutfit.salesAndInventory.API;
+package com.getanoutfit.salesAndInventory.Product;
 
-import com.getanoutfit.salesAndInventory.Model.Product;
-import com.getanoutfit.salesAndInventory.Service.ProductService;
+import com.getanoutfit.salesAndInventory.Product.Product;
+import com.getanoutfit.salesAndInventory.Product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,18 +22,18 @@ import java.util.Optional;
 public class ProductAPI {
     private final ProductService productService;
 
-//    public ProductAPI(ProductService productService) {
-//        this.productService = productService;
-//    }
-
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
-        return ResponseEntity.ok(productService.findAll());
-    }
+    public ResponseEntity<List<Product>> findAll(@Nullable @RequestParam("startDate") String startDate,
+                                                 @Nullable @RequestParam("endDate") String endDate) throws ParseException {
 
-    @PostMapping
-    public ResponseEntity create(@Valid @RequestBody Product product) {
-        return ResponseEntity.ok(productService.save(product));
+        if (startDate != null & endDate != null) {
+            log.info("query startDate: "+startDate+" "+"query endDate: "+endDate);
+            Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+            Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
+            return ResponseEntity.ok(productService.findByCreatedBetween(date1, date2));
+        }
+        log.error(startDate);
+        return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/{id}")
@@ -41,6 +45,12 @@ public class ProductAPI {
         }
         return ResponseEntity.ok(product.get());
     }
+
+    @PostMapping
+    public ResponseEntity create(@Valid @RequestBody Product product) {
+        return ResponseEntity.ok(productService.save(product));
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Product> update(@PathVariable Integer id, @Valid @RequestBody Product product) {
