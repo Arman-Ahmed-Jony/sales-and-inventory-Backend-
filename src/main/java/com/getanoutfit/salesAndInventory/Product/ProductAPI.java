@@ -1,7 +1,7 @@
-package com.getanoutfit.salesAndInventory.API;
+package com.getanoutfit.salesAndInventory.Product;
 
-import com.getanoutfit.salesAndInventory.Model.Product;
-import com.getanoutfit.salesAndInventory.Service.ProductService;
+import com.getanoutfit.salesAndInventory.Product.Product;
+import com.getanoutfit.salesAndInventory.Product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

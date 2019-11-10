@@ -1,7 +1,4 @@
-package com.getanoutfit.salesAndInventory.Service;
-
-import com.getanoutfit.salesAndInventory.Repository.ProductRepository;
-import com.getanoutfit.salesAndInventory.Model.Product;
+package com.getanoutfit.salesAndInventory.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

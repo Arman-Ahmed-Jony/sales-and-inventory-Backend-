@@ -1,6 +1,6 @@
-package com.getanoutfit.salesAndInventory.Repository;
+package com.getanoutfit.salesAndInventory.Product;
 
-import com.getanoutfit.salesAndInventory.Model.Product;
+import com.getanoutfit.salesAndInventory.Product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
