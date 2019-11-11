@@ -29,7 +29,7 @@ public class Product {
     private int prodPrice;
 
     private int prodQuantity;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", nullable=false)
     private ProductCategory prodCategory;
 
