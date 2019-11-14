@@ -51,7 +51,7 @@ public class ProductCategoryAPI {
         log.info("got a product category of :  "+productCategory.toString());
         Optional<ProductCategory> previousDataInDataBase= productCategoryService.findById(id);
         if(productCategory.getCategoryId()==null){
-            productCategory.setId(id);
+//            productCategory.setId(id);
             productCategory.setCategoryId(previousDataInDataBase.get().getCategoryId());
         }
         return ResponseEntity.ok(productCategoryService.update(productCategory));

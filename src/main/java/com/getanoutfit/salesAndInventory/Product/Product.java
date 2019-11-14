@@ -1,5 +1,6 @@
 package com.getanoutfit.salesAndInventory.Product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategory;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,20 +17,21 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+//    @NotNull
     @Column(unique = true)
     private Integer prodId;
 
-    @NotNull
+//    @NotNull
     private String prodName;
 
     private String prodDescription;
 
-    @NotNull
+//    @NotNull
     private int prodPrice;
 
     private int prodQuantity;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     @JoinColumn(name="category_id", nullable=false)
     private ProductCategory prodCategory;
 
