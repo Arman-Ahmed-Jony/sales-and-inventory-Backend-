@@ -2,6 +2,7 @@ package com.getanoutfit.salesAndInventory.ProductCategory;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,17 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductCategoryAPI {
+@Autowired
+    private ProductCategoryService productCategoryService;
 
-    private final ProductCategoryService productCategoryService;
+//    public ProductCategoryAPI(ProductCategoryService productCategoryService) {
+//        this.productCategoryService = productCategoryService;
+//    }
 
     @GetMapping
     private ResponseEntity<List<ProductCategory>> findAll(){
-        log.error("findAll mehthod is called");
-        log.error(productCategoryService.findAll().toString());
+//        log.error("findAll mehthod is called");
+//        log.error(productCategoryService.findAll().toString());
         return ResponseEntity.ok(productCategoryService.findAll());
     }
 }
