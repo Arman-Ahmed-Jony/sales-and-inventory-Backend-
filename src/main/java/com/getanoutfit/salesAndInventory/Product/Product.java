@@ -1,5 +1,8 @@
 package com.getanoutfit.salesAndInventory.Product;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategory;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,25 +14,28 @@ import java.util.Date;
 
 @Entity
 @Data
+@JsonIdentityInfo(scope = Product.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+    //    @NotNull
     @Column(unique = true)
     private Integer prodId;
 
-    @NotNull
+    //    @NotNull
     private String prodName;
 
     private String prodDescription;
 
-    @NotNull
+    //    @NotNull
     private int prodPrice;
 
     private int prodQuantity;
-    @ManyToOne
+
+    @ManyToOne()
     @JoinColumn(name="category_id", nullable=false)
     private ProductCategory prodCategory;
 
