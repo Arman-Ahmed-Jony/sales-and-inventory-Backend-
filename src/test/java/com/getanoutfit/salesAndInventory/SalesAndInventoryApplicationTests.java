@@ -1,7 +1,7 @@
 package com.getanoutfit.salesAndInventory;
 
 import com.getanoutfit.salesAndInventory.Product.ProductDto;
-import com.getanoutfit.salesAndInventory.Mapper.ProductMapper;
+import com.getanoutfit.salesAndInventory.Mapper.MapperBuilder;
 import com.getanoutfit.salesAndInventory.Product.Product;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategory;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class SalesAndInventoryApplicationTests {
 		product.setProdPrice(12);
 		product.setProdCategory(productCategory);
 //		new ProductDto("test", "test", "12");
-		ProductDto productDto= ProductMapper.INSTANCE.productToProductDto(product);
+		ProductDto productDto= MapperBuilder.INSTANCE.productToProductDto(product);
 		System.out.println("test is "+productDto.toString());
 		System.out.println("test is "+product.toString());
 		System.out.println(product.equals(productDto));

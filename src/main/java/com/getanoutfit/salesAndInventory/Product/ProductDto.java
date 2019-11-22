@@ -17,8 +17,6 @@ public class ProductDto {
     private int prodQuantity;
     private String prodCategory;
     private Date updated;
-    public ProductDto() {
-    }
 
 }
 

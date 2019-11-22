@@ -28,7 +28,7 @@ public class ProductCategory {
 //    @Column(unique = true, updatable = false)
 //    @Column(name = "category_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CATEGORY_ID")
     private Integer id;
 
