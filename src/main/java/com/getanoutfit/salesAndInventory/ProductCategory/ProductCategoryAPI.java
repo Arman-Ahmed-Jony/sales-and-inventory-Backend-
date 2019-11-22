@@ -1,6 +1,6 @@
 package com.getanoutfit.salesAndInventory.ProductCategory;
 
-import jdk.jfr.ContentType;
+//import jdk.jfr.ContentType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,6 @@ public class ProductCategoryAPI {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProductCategory>> findAll() {
-//        log.error("findAll mehthod is called");
-//        log.error(productCategoryService.findAll().toString());
         return ResponseEntity.ok(productCategoryService.findAll());
     }
 
