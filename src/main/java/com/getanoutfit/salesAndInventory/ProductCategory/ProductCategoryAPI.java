@@ -25,7 +25,7 @@ public class ProductCategoryAPI {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAll() {
-        List<ProductCategoryDTO> dtoList = productCategoryService.findAll().stream().map(product -> MapperBuilder.INSTANCE.ProductCategoryToProductCategoryDto(product)).collect(Collectors.toList());
+        List<ProductCategoryDTO> dtoList = productCategoryService.findAll().stream().map(productCategory -> MapperBuilder.INSTANCE.productCategoryToProductCategoryDto(productCategory)).collect(Collectors.toList());
         Map response = new HashMap();
         response.put("data", dtoList);
         response.put("status", HttpServletResponse.SC_OK);
@@ -42,7 +42,7 @@ public class ProductCategoryAPI {
             response.put("message", "no data against this id");
             return ResponseEntity.ok(response);
         }
-        ProductCategoryDTO productCategoryDTO = MapperBuilder.INSTANCE.ProductCategoryToProductCategoryDto(productCategory.get());
+        ProductCategoryDTO productCategoryDTO = MapperBuilder.INSTANCE.productCategoryToProductCategoryDto(productCategory.get());
         response.put("data", productCategoryDTO);
         response.put("status", HttpServletResponse.SC_FOUND);
         return ResponseEntity.ok(response);
@@ -53,7 +53,7 @@ public class ProductCategoryAPI {
         ProductCategory productCategory = MapperBuilder.INSTANCE.productCategoryDTOToProductCategory(productCategoryDTO);
 
         Map response = new HashMap();
-        response.put("data", MapperBuilder.INSTANCE.ProductCategoryToProductCategoryDto(productCategoryService.save(productCategory)));
+        response.put("data", MapperBuilder.INSTANCE.productCategoryToProductCategoryDto(productCategoryService.save(productCategory)));
         response.put("status", "200");
         return ResponseEntity.ok(response);
     }

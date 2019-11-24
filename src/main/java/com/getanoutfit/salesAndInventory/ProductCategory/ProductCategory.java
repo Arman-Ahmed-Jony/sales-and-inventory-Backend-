@@ -37,9 +37,9 @@ public class ProductCategory {
 
     //    @OneToMany(mappedBy = "prodCategory")
 //    private List<Product> productList;
-    @JsonIgnore
-    @OneToMany(mappedBy = "prodCategory")
-    private Set<Product> items = new HashSet<Product>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "prodCategory")
+//    private Set<Product> items = new HashSet<Product>();
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp

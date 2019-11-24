@@ -17,12 +17,12 @@ import java.util.Date;
 @JsonIdentityInfo(scope = Product.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     //    @NotNull
-    @Column(unique = true)
+    @Id
     private Integer prodId;
 
     //    @NotNull
@@ -44,6 +44,4 @@ public class Product {
 
     @UpdateTimestamp
     private Date updated;
-
-
 }
