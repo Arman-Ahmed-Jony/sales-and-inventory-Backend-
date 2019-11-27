@@ -12,14 +12,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Data
-@JsonIdentityInfo(scope = ProductCategory.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@Data
+//@JsonIdentityInfo(scope = ProductCategory.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ProductCategory {
     //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +25,9 @@ public class ProductCategory {
 //    @Column(unique = true, updatable = false)
 //    @Column(name = "category_id")
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CATEGORY_ID")
+    @Column(name = "PRODUCT_CATEGORY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "CATEGORY_ID")
     private Integer id;
 
     //    @NotNull
@@ -38,13 +36,91 @@ public class ProductCategory {
     //    @OneToMany(mappedBy = "prodCategory")
 //    private List<Product> productList;
 //    @JsonIgnore
-//    @OneToMany(mappedBy = "prodCategory")
-//    private Set<Product> items = new HashSet<Product>();
+    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL)
+    private Set<Product> items = new HashSet<Product>();
 
-    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Date created;
 
     @UpdateTimestamp
     private Date updated;
+
+    public ProductCategory(Integer id, String categoryName, Set<Product> items, Date created, Date updated) {
+        this.id = id;
+        this.categoryName = categoryName;
+        this.items = items;
+        this.created = created;
+        this.updated = updated;
+    }
+
+    public ProductCategory() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Set<Product> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Product> items) {
+        this.items = items;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductCategory that = (ProductCategory) o;
+        return id.equals(that.id) &&
+                categoryName.equals(that.categoryName) &&
+                items.equals(that.items) &&
+                created.equals(that.created) &&
+                updated.equals(that.updated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, categoryName, items, created, updated);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductCategory{" +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                ", items=" + items +
+                ", created=" + created +
+                ", updated=" + updated +
+                '}';
+    }
 }

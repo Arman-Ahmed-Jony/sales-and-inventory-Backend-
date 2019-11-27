@@ -13,12 +13,12 @@ public interface MapperBuilder {
     MapperBuilder INSTANCE = Mappers.getMapper(MapperBuilder.class);
 
     @Mapping(source = "prodDescription", target = "prodDesc")
-    @Mapping(source = "prodCategory.id", target = "prodCategory")
+    @Mapping(source = "productCategory.id", target = "prodCategory")
     @Mapping(source = "id",target = "prodId")
     ProductDto productToProductDto(Product product);
 
     @Mapping(source = "prodDesc", target = "prodDescription")
-    @Mapping(source = "prodCategory", target = "prodCategory.id")
+    @Mapping(source = "prodCategory", target = "productCategory.id")
     @Mapping(source = "prodId",target = "id")
     Product productDTOToProduct(ProductDto productDto);
 
