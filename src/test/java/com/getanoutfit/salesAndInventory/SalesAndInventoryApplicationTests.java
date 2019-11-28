@@ -19,19 +19,20 @@ class SalesAndInventoryApplicationTests {
 	ProductService productService;
 	@Test
 	void contextLoads() {
-		Product product= new Product();
-		ProductCategory productCategory = new ProductCategory();
-		productCategory.setId(1);
-		productCategory.setCategoryName("test Name");
-		product.setProdName("test");
-		product.setProdDescription("test");
-		product.setProdPrice(12);
-		product.setProductCategory(productCategory);
-//		new ProductDto("test", "test", "12");
-		ProductDto productDto= MapperBuilder.INSTANCE.productToProductDto(product);
-		System.out.println("test is "+productDto.toString());
-		System.out.println("test is "+product.toString());
-		System.out.println(product.equals(productDto));
+//		Product product= new Product();
+//		ProductCategory productCategory = new ProductCategory();
+//		productCategory.setId(1);
+//		productCategory.setCategoryName("test Name");
+//
+//		product.setProdName("test");
+//		product.setProdDescription("test");
+//		product.setProdPrice(12);
+//		product.setProductCategory(productCategory);
+////		new ProductDto("test", "test", "12");
+//		ProductDto productDto= MapperBuilder.INSTANCE.productToProductDto(product);
+//		System.out.println("test is "+productDto.toString());
+//		System.out.println("test is "+product.toString());
+//		System.out.println(product.equals(productDto));
 	}
 
 	@Test
@@ -52,9 +53,7 @@ class SalesAndInventoryApplicationTests {
 
 		productService.save(product);
 
-
 		productCategoryService.deleteById(1);
-
 
 	}
 
