@@ -43,16 +43,36 @@ class SalesAndInventoryApplicationTests {
 
 		productCategoryService.save(productCategory);
 
-		Product product = new Product();
-		product.setProductCategory(productCategory);
-		product.setId(1);
-		product.setProdName("rambo");
-		product.setProdPrice(2500);
-		product.setProdId(1);
-		product.setProdQuantity(2);
+        Product product1 = new Product();
+        Product product2 = new Product();
+        Product product3 = new Product();
 
-		productService.save(product);
+        product1.setProductCategory(productCategory);
+		product1.setId(1);
+		product1.setProdName("rambo");
+		product1.setProdPrice(2500);
+		product1.setProdId(1);
+		product1.setProdQuantity(2);
 
+        product2.setProductCategory(productCategory);
+        product2.setId(2);
+        product2.setProdName("rambo");
+        product2.setProdPrice(2500);
+        product2.setProdId(2);
+        product2.setProdQuantity(2);
+
+
+        product3.setProductCategory(productCategory);
+        product3.setId(3);
+        product3.setProdName("rambo");
+        product3.setProdPrice(2500);
+        product3.setProdId(3);
+        product3.setProdQuantity(2);
+
+        productService.save(product1);
+        productService.save(product2);
+        productService.save(product3);
+		productService.deleteByProductCategory(productCategory.getId());
 		productCategoryService.deleteById(1);
 
 	}

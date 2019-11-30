@@ -1,5 +1,7 @@
 package com.getanoutfit.salesAndInventory.Mapper;
 
+import com.getanoutfit.salesAndInventory.Employee.Employee;
+import com.getanoutfit.salesAndInventory.Employee.EmployeeDTO;
 import com.getanoutfit.salesAndInventory.Product.ProductDto;
 import com.getanoutfit.salesAndInventory.Product.Product;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategory;
@@ -25,4 +27,17 @@ public interface MapperBuilder {
     ProductCategoryDTO productCategoryToProductCategoryDto(ProductCategory productCategory);
 
     ProductCategory productCategoryDTOToProductCategory(ProductCategoryDTO productCategoryDTO);
+
+    @Mapping(source = "fname", target = "fullName.fname")
+    @Mapping(source = "lname", target = "fullName.lname")
+    @Mapping(source = "permanentAddress", target = "address.permanentAddress")
+    @Mapping(source = "residentialAddress", target = "address.residentialAddress")
+    Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);
+
+    @Mapping(source = "fullName.fname", target = "fname")
+    @Mapping(source = "fullName.lname", target = "lname")
+    @Mapping(source = "address.permanentAddress", target = "permanentAddress")
+    @Mapping(source = "address.residentialAddress", target = "residentialAddress")
+    EmployeeDTO employeeToEmployeeDTO(Employee employee);
+
 }

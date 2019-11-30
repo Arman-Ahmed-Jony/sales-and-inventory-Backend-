@@ -28,6 +28,9 @@ public class ProductService {
     public void deleteById(Integer id) {
         productRepository.deleteById(id);
     }
+    public void deleteByProductCategory(Integer category) {
+        productRepository.deleteByCategoryId(category);
+    }
 
     public Product findByProdIdAndProdName(Integer prodId, String prodName) {
         return productRepository.findByProdIdAndProdName(prodId, prodName);
