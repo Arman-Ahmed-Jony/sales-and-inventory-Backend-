@@ -48,4 +48,6 @@ public interface MapperBuilder {
     @Mapping(source = "empId", target = "employee.id")
     User userDTOToUser(UserDTO userDTO);
 
+    User loginDTOToUser(UserDTO user);
+
 }

@@ -33,7 +33,22 @@ public class UserAPI {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/login",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginDTO) {
+        Map response = new HashMap();
+        Optional<User> user = userService.findByUserNameAndPass(loginDTO.getUserName(), loginDTO.getPass());
+        if (!user.isPresent()){
+            response.put("status", HttpServletResponse.SC_UNAUTHORIZED);
+            response.put("message", "you are unauthorized");
+            return ResponseEntity.ok(response);
+        }
+        response.put("data", user);
+
+        response.put("staus", HttpServletResponse.SC_OK);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(value = "/signUp",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> save(@Valid @RequestBody UserDTO userDTO) {
         Map response = new HashMap();
         User user = MapperBuilder.INSTANCE.userDTOToUser(userDTO);
@@ -58,10 +73,10 @@ public class UserAPI {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody UserDTO userDTO){
+    public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody UserDTO userDTO) {
         Map response = new HashMap();
         Optional<User> user = userService.findById(id);
-        if(!user.isPresent()){
+        if (!user.isPresent()) {
             response.put("status", HttpServletResponse.SC_NOT_MODIFIED);
             response.put("message", "no data found against this id");
             return ResponseEntity.ok(response);

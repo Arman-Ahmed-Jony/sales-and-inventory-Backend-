@@ -1,6 +1,8 @@
 package com.getanoutfit.salesAndInventory.Sales;
 
 import com.getanoutfit.salesAndInventory.Employee.Employee;
+import com.getanoutfit.salesAndInventory.Product.Product;
+import com.getanoutfit.salesAndInventory.Sales.SalesProduct.SalesProducts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,6 +39,19 @@ public class SalesAPI {
         Employee employee = new Employee();
         employee.setId(1);
         sales.setEmployee(employee);
+
+        Set<SalesProducts> listOfProducts = new HashSet<>();
+        SalesProducts salesProducts = new SalesProducts();
+        Product product = new Product();
+        product.setId(1);
+        salesProducts.setProduct(product);
+        SalesProducts.SalesProductsId salesProductsId = new SalesProducts.SalesProductsId();
+        salesProductsId.setProductId(product.getId());
+        salesProductsId.setSaleId(1);
+        salesProducts.setSalesProductsId(salesProductsId);
+//        salesProducts.setSalesProductsId();
+        listOfProducts.add(salesProducts);
+        sales.setProducts(listOfProducts);
         salesService.save(sales);
         return ResponseEntity.ok(salesDTO);
     }

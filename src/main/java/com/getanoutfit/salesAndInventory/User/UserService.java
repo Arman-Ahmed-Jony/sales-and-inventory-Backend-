@@ -21,11 +21,15 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User save(User user){
+    public User save(User user) {
         return userRepository.save(user);
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    public Optional<User> findByUserNameAndPass(String userName, String pass) {
+        return userRepository.findByUserNameAndPass(userName, pass);
     }
 }
