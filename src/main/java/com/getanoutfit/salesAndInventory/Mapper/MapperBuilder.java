@@ -6,6 +6,8 @@ import com.getanoutfit.salesAndInventory.Product.ProductDto;
 import com.getanoutfit.salesAndInventory.Product.Product;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategory;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategoryDTO;
+import com.getanoutfit.salesAndInventory.User.User;
+import com.getanoutfit.salesAndInventory.User.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -39,5 +41,11 @@ public interface MapperBuilder {
     @Mapping(source = "address.permanentAddress", target = "permanentAddress")
     @Mapping(source = "address.residentialAddress", target = "residentialAddress")
     EmployeeDTO employeeToEmployeeDTO(Employee employee);
+
+    @Mapping(source = "employee.id", target = "empId")
+    UserDTO userToUserDTO(User user);
+
+    @Mapping(source = "empId", target = "employee.id")
+    User userDTOToUser(UserDTO userDTO);
 
 }
