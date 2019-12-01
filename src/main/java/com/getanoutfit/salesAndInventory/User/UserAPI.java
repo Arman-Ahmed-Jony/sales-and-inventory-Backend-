@@ -48,7 +48,7 @@ public class UserAPI {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(value = "/signUp",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> save(@Valid @RequestBody UserDTO userDTO) {
         Map response = new HashMap();
         User user = MapperBuilder.INSTANCE.userDTOToUser(userDTO);
