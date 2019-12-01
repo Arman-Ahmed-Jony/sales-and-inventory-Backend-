@@ -18,6 +18,7 @@ public class User {
     @OneToOne
     private Employee employee;
     @NotNull
+    @Column(unique = true)
     private String userName;
     @NotNull
     private String pass;

@@ -1,20 +1,14 @@
 package com.getanoutfit.salesAndInventory.Product;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategory;
-import com.getanoutfit.salesAndInventory.Sales.Sales;
-import com.getanoutfit.salesAndInventory.Sales.SalesProducts;
+import com.getanoutfit.salesAndInventory.Sales.SalesProduct.SalesProducts;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
