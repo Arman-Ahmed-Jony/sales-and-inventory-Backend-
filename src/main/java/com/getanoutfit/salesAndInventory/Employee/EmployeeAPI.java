@@ -77,7 +77,7 @@ public class EmployeeAPI {
 
     }
 
-    @DeleteMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         Map response = new HashMap();
         Optional<Employee> employee = employeeService.findById(id);
