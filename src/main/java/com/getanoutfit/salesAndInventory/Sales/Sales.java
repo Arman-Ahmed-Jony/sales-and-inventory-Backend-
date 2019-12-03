@@ -1,5 +1,6 @@
 package com.getanoutfit.salesAndInventory.Sales;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.getanoutfit.salesAndInventory.Employee.Employee;
 import com.getanoutfit.salesAndInventory.Sales.SalesProduct.SalesProducts;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class Sales {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @OneToMany(mappedBy = "sales")
+    @JsonIgnore
     private Set<SalesProducts> products = new HashSet<>();
     private String comment;
     @OneToOne

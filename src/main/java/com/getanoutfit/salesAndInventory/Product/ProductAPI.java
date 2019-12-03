@@ -95,7 +95,7 @@ public class ProductAPI {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity delete(@PathVariable Integer id) {
         Map response = new HashMap();
         if (!productService.findById(id).isPresent()) {

@@ -35,6 +35,12 @@ public class SalesProducts {
         @Column(name = "fk_product")
         protected Integer productId;
 
+        public SalesProductsId() {
+        }
 
+        public SalesProductsId(Integer saleId, Integer productId) {
+            this.saleId = saleId;
+            this.productId = productId;
+        }
     }
 }
