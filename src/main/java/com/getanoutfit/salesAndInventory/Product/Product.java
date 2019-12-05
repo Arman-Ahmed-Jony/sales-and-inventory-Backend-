@@ -1,5 +1,6 @@
 package com.getanoutfit.salesAndInventory.Product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.getanoutfit.salesAndInventory.ProductCategory.ProductCategory;
 import com.getanoutfit.salesAndInventory.Sales.SalesProduct.SalesProducts;
 import lombok.Data;
@@ -38,6 +39,7 @@ public class Product {
     private ProductCategory productCategory;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private Set<SalesProducts> sales= new HashSet<>();
     @CreationTimestamp
     private Date created;

@@ -63,7 +63,7 @@ public interface MapperBuilder {
             @Mapping(source = "products", target = "products"),
             @Mapping(source = "empId", target = "employee.id")
     })
-    Sales salesDTOToSalse(SalesDTO salesDTO);
+    Sales salesDTOToSales(SalesDTO salesDTO);
 
     @Mappings({
             @Mapping(source = "products", target = "products"),

@@ -1,6 +1,7 @@
 package com.getanoutfit.salesAndInventory.Sales;
 
 import com.getanoutfit.salesAndInventory.Product.ProductDto;
+import com.getanoutfit.salesAndInventory.Sales.SalesProduct.SalesProducts;
 import lombok.Data;
 
 import java.util.Date;

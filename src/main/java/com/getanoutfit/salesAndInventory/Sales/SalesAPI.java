@@ -1,9 +1,12 @@
 package com.getanoutfit.salesAndInventory.Sales;
 
 import com.getanoutfit.salesAndInventory.Employee.Employee;
+import com.getanoutfit.salesAndInventory.Employee.EmployeeService;
 import com.getanoutfit.salesAndInventory.Mapper.MapperBuilder;
 import com.getanoutfit.salesAndInventory.Product.Product;
 import com.getanoutfit.salesAndInventory.Product.ProductDto;
+import com.getanoutfit.salesAndInventory.Product.ProductService;
+import com.getanoutfit.salesAndInventory.Sales.SalesProduct.SalesProductService;
 import com.getanoutfit.salesAndInventory.Sales.SalesProduct.SalesProducts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,51 +26,73 @@ import java.util.stream.Collectors;
 public class SalesAPI {
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private SalesProductService salesProductService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAll() {
         Map response = new HashMap<>();
-        List<Sales> sales = salesService.findAll();
-//        SalesDTO salesDTO = MapperBuilder.INSTANCE.
-        response.put("data", sales);
+//        List<SalesProducts> salesProducts = new ArrayList<>();
+        List<Sales> salesList = salesService.findAll();
+//        List<SalesDTO> salesDTOS = sales.stream().map(sale -> MapperBuilder.INSTANCE.productToProductDto(product)).collect(Collectors.toList());
+        List<SalesDTO> salesDTOS = new ArrayList<>();
+        for (Sales sales :
+                salesList) {
+            log.info(sales.toString());
+            SalesDTO salesDTO = new SalesDTO();
+            salesDTO.setId(sales.getId());
+            salesDTO.setComment(sales.getComment());
+            salesDTO.setEmpId(sales.getEmployee().getId());
+            salesDTO.setUpdated(sales.getUpdated());
+
+            Set<ProductDto> productDtos = new HashSet<>();
+
+            for (SalesProducts products :
+                    sales.getProducts()) {
+                ProductDto productDto = new ProductDto();
+                productDto.setProdId(products.getProduct().getProdId());
+                productDto.setProdName(products.getProduct().getProdName());
+                productDto.setProdCategory(products.getProduct().getProductCategory().getId());
+                productDto.setProdPrice(products.getPrice());
+                productDto.setProdQuantity(products.getQuantity());
+
+                productDtos.add(productDto);
+            }
+
+            salesDTO.setProducts(productDtos);
+            salesDTOS.add(salesDTO);
+        }
+
+        response.put("data", salesDTOS);
         response.put("status", HttpServletResponse.SC_OK);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity save(@Valid @RequestBody SalesDTO salesDTO) {
-//        Sales sales = new Sales();
+
+        log.info(salesDTO.toString());
+        Sales sales = new Sales();
+
+        sales.setEmployee(employeeService.findById(salesDTO.getEmpId()).get());
+
 //        sales.setComment("test comment");
-////        salesService.save()
-//        Employee employee = new Employee();
-//        employee.setId(1);
-//        sales.setEmployee(employee);
-//
-//        Set<SalesProducts> listOfProducts = new HashSet<>();
-//        SalesProducts salesProducts = new SalesProducts();
-//        Product product = new Product();
-//        product.setId(1);
-//        salesProducts.setProduct(product);
-//        SalesProducts.SalesProductsId salesProductsId = new SalesProducts.SalesProductsId();
-//        salesProductsId.setProductId(product.getId());
-//        salesProductsId.setSaleId(1);
-//        salesProducts.setSalesProductsId(salesProductsId);
-////        salesProducts.setSalesProductsId();
-//        listOfProducts.add(salesProducts);
-//        sales.setProducts(listOfProducts);
-//        salesService.save(sales);
-//salesDTO.setComment("teset");
-//salesDTO.setEmpId(1);
-//salesDTO.setId(2);
-//salesDTO.setProducts(new ProductDto[]);
-//        Set<ProductDto> =
-//        salesDTO.setProducts();
-        Set<Product> products = salesDTO.getProducts().stream().map(productDto -> MapperBuilder.INSTANCE.productDTOToProduct(productDto)).collect(Collectors.toSet());
-        Sales sales = MapperBuilder.INSTANCE.salesDTOToSalse(salesDTO);
-//        sales.setProducts(products);
-        SalesProducts salesProducts = new SalesProducts();
-        salesProducts.setSalesProductsId(new SalesProducts.SalesProductsId(1,1));
-        return ResponseEntity.ok(salesProducts);
+
+        salesService.save(sales);
+
+
+        for (ProductDto products : salesDTO.getProducts()
+        ) {
+            Product p = productService.findById(products.getProdId()).get();
+            SalesProducts salesProducts = new SalesProducts(sales, p, products.getProdQuantity(), products.getProdPrice());
+            salesProductService.save(salesProducts);
+        }
+// up to this done sales saving
+        return ResponseEntity.ok(sales);
 
     }
 }

@@ -16,6 +16,9 @@ public class SalesProductService {
     public List<SalesProducts> findAll(){
         return salesProductRepository.findAll();
     }
+    public SalesProducts save( SalesProducts salesProducts){
+        return salesProductRepository.save(salesProducts);
+    }
 
 //    public SalesProducts findById(){
 //        return

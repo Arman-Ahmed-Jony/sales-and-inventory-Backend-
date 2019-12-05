@@ -58,7 +58,7 @@ public class UserAPI {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id) {
         Map response = new HashMap();
         if (!userService.findById(id).isPresent()) {
