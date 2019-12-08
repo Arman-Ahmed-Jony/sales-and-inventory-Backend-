@@ -44,7 +44,7 @@ public class UserAPI {
         }
         response.put("data", user);
 
-        response.put("staus", HttpServletResponse.SC_OK);
+        response.put("status", HttpServletResponse.SC_OK);
         return ResponseEntity.ok(response);
     }
 

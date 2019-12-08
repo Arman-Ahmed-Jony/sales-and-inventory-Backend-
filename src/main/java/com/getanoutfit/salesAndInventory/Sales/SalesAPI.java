@@ -81,7 +81,7 @@ public class SalesAPI {
         sales.setEmployee(employeeService.findById(salesDTO.getEmpId()).get());
 
 //        sales.setComment("test comment");
-
+sales.setComment(salesDTO.getComment());
         salesService.save(sales);
 
 
@@ -89,7 +89,11 @@ public class SalesAPI {
         ) {
             Product p = productService.findById(products.getProdId()).get();
             SalesProducts salesProducts = new SalesProducts(sales, p, products.getProdQuantity(), products.getProdPrice());
+            Product updatedProduct= productService.findById(products.getProdId()).get();
+            updatedProduct.setProdQuantity(updatedProduct.getProdQuantity()-products.getProdQuantity());
+
             salesProductService.save(salesProducts);
+            productService.save(updatedProduct);
         }
 // up to this done sales saving
         return ResponseEntity.ok(sales);
