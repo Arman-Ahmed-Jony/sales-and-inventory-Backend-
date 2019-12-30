@@ -1,6 +1,7 @@
 package com.getanoutfit.salesAndInventory.Product;
 
 import com.getanoutfit.salesAndInventory.Mapper.MapperBuilder;
+import com.sun.mail.iap.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,5 +108,9 @@ public class ProductAPI {
         response.put("status", HttpServletResponse.SC_OK);
         response.put("message", "data deleted successfully");
         return ResponseEntity.ok(response);
+    }
+    @GetMapping(value = "/sendMail")
+    public ResponseEntity sendMail(){
+        return ResponseEntity.ok("test mail ");
     }
 }
