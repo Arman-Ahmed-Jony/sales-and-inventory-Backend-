@@ -62,6 +62,7 @@ public class ProductCategoryAPI {
     public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody ProductCategoryDTO productCategoryDTO) {
         Map response = new HashMap();
         Optional<ProductCategory> productCategory = productCategoryService.findById(id);
+        log.error(productCategory.get().toString());
         if (!productCategory.isPresent()) {
             response.put("status", HttpServletResponse.SC_NOT_MODIFIED);
             response.put("message", "no data found against this id");
@@ -70,7 +71,8 @@ public class ProductCategoryAPI {
         log.info(productCategoryDTO.toString());
         ProductCategory data = MapperBuilder.INSTANCE.productCategoryDTOToProductCategory(productCategoryDTO);
         log.info(data.toString());
-        productCategoryService.update(data);
+        data.setId(id);
+        productCategoryService.save(data);
         response.put("data", data);
         response.put("status", HttpServletResponse.SC_OK);
         return ResponseEntity.ok(response);

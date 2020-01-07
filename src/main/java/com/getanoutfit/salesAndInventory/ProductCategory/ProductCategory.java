@@ -19,31 +19,12 @@ import java.util.*;
 @Data
 //@JsonIdentityInfo(scope = ProductCategory.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ProductCategory {
-    //    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Integer id;
-//
-//    @Column(unique = true, updatable = false)
-//    @Column(name = "category_id")
     @Id
-//    @Column(name = "product_category_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "CATEGORY_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    //    @NotNull
+    @NotNull
     private String categoryName;
-
-    //    @OneToMany(mappedBy = "prodCategory")
-////    private List<Product> productList;
-//    @JsonIgnore
-//    @OneToMany(orphanRemoval = true)
-//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
-//            org.hibernate.annotations.CascadeType.DELETE,
-//            org.hibernate.annotations.CascadeType.MERGE,
-//            org.hibernate.annotations.CascadeType.PERSIST,
-//            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
-//    private Set<Product> items = new HashSet<Product>();
 
     @CreationTimestamp
     private Date created;
