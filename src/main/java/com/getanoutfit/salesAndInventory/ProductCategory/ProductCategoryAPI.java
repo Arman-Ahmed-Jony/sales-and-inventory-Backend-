@@ -72,7 +72,7 @@ public class ProductCategoryAPI {
         ProductCategory data = MapperBuilder.INSTANCE.productCategoryDTOToProductCategory(productCategoryDTO);
         log.info(data.toString());
         data.setId(id);
-        productCategoryService.save(data);
+        productCategoryService.update(data);
         response.put("data", data);
         response.put("status", HttpServletResponse.SC_OK);
         return ResponseEntity.ok(response);
