@@ -108,8 +108,14 @@ public class ProductAPI {
         response.put("message", "data deleted successfully");
         return ResponseEntity.ok(response);
     }
+
     @GetMapping(value = "/sendMail")
     public ResponseEntity sendMail(){
         return ResponseEntity.ok("test mail ");
+    }
+
+    @PostMapping(value = "uploadImage")
+    public ResponseEntity uploadImage(){
+        return ResponseEntity.ok("image uploaded");
     }
 }
